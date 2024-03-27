@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Differenza tra date</title>
+  </head>
+  <body>
+    <div>
+      <label for="data1">Data Inizio</label>
+      <input type="date" id="data1" />
+    </div>
+    <div>
+      <label for="data2">Data Fine</label>
+      <input type="date" id="data2" />
+    </div>
+    <button class="btn">Cliccami</button>
+
+    <script>
+      const btn = document.querySelector(".btn");
+      const data1 = document.querySelector("#data1");
+      const data2 = document.querySelector("#data2");
+
+      
+      btn.addEventListener("click", function (e) {
+        const date1MilliSecondi = new Date(data1.value).getTime();
+        const date2MilliSecondi = new Date(data2.value).getTime();
+        if (date2MilliSecondi > date1MilliSecondi) {
+          const differenza = (date2MilliSecondi - date1MilliSecondi) / (1000 * 60 * 60 * 24);
+          let paragrafo = document.createElement('p');
+            let text = `ci sono ${differenza} giorni di differnza tra la data di fine e quella di inizio`
+            let textParagrafo = document.createTextNode(text);
+            paragrafo.appendChild(textParagrafo);
+            document.querySelector('body').appendChild(paragrafo);
+            
+        } else {
+            let paragrafo = document.createElement('p');
+            let text = 'la data di inizio non può essere maggiore o uguale di quella finale'
+            let textParagrafo = document.createTextNode(text);
+            paragrafo.appendChild(textParagrafo);
+            document.querySelector('body').appendChild(paragrafo);
+            setTimeout(function () {
+                window.location.reload()
+            }, 2000);
+        }
+        
+    });
+    </script>
+  </body>
+</html>
